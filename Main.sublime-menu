@@ -1,0 +1,32 @@
+[
+  {
+    "caption": "Preferences",
+    "id": "preferences",
+    "children":
+    [
+      {
+        "caption": "Package Settings",
+        "id": "package-settings",
+        "children":
+        [
+          {
+            "caption": "SublimeExplorerIntegration",
+            "id": "sublimeexplorerintegration",
+            "children":
+            [
+              {
+                "command": "edit_settings",
+                "caption": "Settings",
+                "mnemonic": "S",
+                "args":
+                {
+                  "base_file": "${packages}/SublimeExplorerIntegration/SublimeExplorerIntegration.sublime-settings"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

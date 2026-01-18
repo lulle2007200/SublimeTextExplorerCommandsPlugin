@@ -1,0 +1,27 @@
+[
+	{
+		"command": "sublime_explorer_integration_update",
+		"caption": "SublimeExplorerIntegration: Check for Updates"
+	},
+	{
+		"command": "sublime_explorer_integration_install",
+		"caption": "SublimeExplorerIntegration: Install"
+	},
+	{
+		"command": "sublime_explorer_integration_uninstall",
+		"caption": "SublimeExplorerIntegration: Uninstall"
+	},
+	{
+		"command": "edit_settings",
+		"caption": "Preferences: SublimeExplorerIntegration",
+		"args": {
+			"base_file": "${packages}/SublimeExplorerIntegration/SublimeExplorerIntegration.sublime-settings"
+		}
+	},
+	{
+		"command": "sublime_explorer_integration_install_done"
+	},
+	{
+		"command": "sublime_explorer_integration_uninstall_done"
+	}
+]
