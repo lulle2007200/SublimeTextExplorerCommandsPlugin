@@ -101,8 +101,10 @@ class Installer:
 		uninstall_success_cmd  = self.make_launch_subl_cmd("sublime_explorer_integration_uninstall_done", result=0)
 		uninstall_failure_cmd  = self.make_launch_subl_cmd("sublime_explorer_integration_uninstall_done", result=-1)
 
-		cmd = ";".join([close_sublime_cmd,
-		                remove_package_cmd])
+		# cmd = ";".join([close_sublime_cmd,
+		#                 remove_package_cmd])
+
+		cmd = ";".join([remove_package_cmd])
 
 		cmd = f"try {{{cmd};{uninstall_success_cmd}}}catch{{{uninstall_failure_cmd}}}"
 
@@ -120,8 +122,13 @@ class Installer:
 		update_success_cmd = self.make_launch_subl_cmd("sublime_explorer_integration_install_done", result=0, release_ts=ts)
 		update_failure_cmd = self.make_launch_subl_cmd("sublime_explorer_integration_install_done", result=-1, release_ts=ts)
 
-		cmd = ";".join([close_sublime_cmd,
-		                install_cert_cmd,
+		# cmd = ";".join([close_sublime_cmd,
+		#                 install_cert_cmd,
+		#                 copy_external_cmd,
+		#                 remove_package_cmd,
+		#                 install_package_cmd])
+
+		cmd = ";".join([install_cert_cmd,
 		                copy_external_cmd,
 		                remove_package_cmd,
 		                install_package_cmd])
@@ -199,10 +206,10 @@ class SublimeExplorerIntegrationInstallCommand(sublime_plugin.ApplicationCommand
 			self.i.load_release_info()
 			window = sublime.active_window()
 			items = ["Install", "Cancel"]
-			placeholder = "Continue with installation? This will restart Sublime Text."
+			placeholder = "Continue with installation?"
 			if self.i.is_installed():
 				items[0] = "Reinstall"
-				placeholder = "Already installed. Continue with reinstallation? This will restart Sublime Text."
+				placeholder = "Already installed. Continue with reinstallation?"
 			window.show_quick_panel(items, self.on_select, placeholder=placeholder)
 		except Exception:
 			sublime.run_command("sublime_explorer_integration_install_done", {"result":-1})
@@ -232,7 +239,7 @@ class SublimeExplorerIntegrationUninstallCommand(sublime_plugin.ApplicationComma
 			window = sublime.active_window()
 			cb = self.on_select
 			items = ["Uninstall", "Cancel"]
-			placeholder = "Continue with deinstallation? This will Restart Sublime Text."
+			placeholder = "Continue with deinstallation?"
 			if not self.i.is_installed():
 				items = ["Ok"]
 				placeholder = "Not installed."
@@ -269,7 +276,7 @@ class SublimeExplorerIntegrationUpdateCommand(sublime_plugin.ApplicationCommand)
 
 			items = ["Update", "Cancel"]
 			cb = self.on_select
-			placeholder = "Update available. Update now? This will restart Sublime Text."
+			placeholder = "Update available. Update now?"
 			update_available = self.i.update_available()
 
 			if not update_available:
